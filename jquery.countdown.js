@@ -121,7 +121,7 @@
 					var $this = $(this);
 					var opts = $.extend({}, $.fn.countdown.defaults, options);
 					$($this).data('countdown-opts',opts);
-					if(opts.start) {
+					if(opts.autostart) {
 						start($this,opts);
 					}
 				});
@@ -146,7 +146,6 @@
 				return this.each(function(){
 					var $this = $(this);
 					var opts = $.extend({}, $.fn.countdown.defaults, $($this).data('countdown-opts'));
-					opts.start = true;
 					start($this,opts);
 				});
 			},
@@ -178,7 +177,7 @@
 	};
 
 	$.fn.countdown.defaults = {
-		start: false,
+		autostart: false,
 		y: 0,
 		d: 0,
 		h: 0,
