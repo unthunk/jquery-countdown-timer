@@ -86,10 +86,20 @@ Create a countdown timer on #my-countdown that automatically starts counting dow
 	<title>countdown</title>
 </head>
 <body>
-	<div id="my-countdown"></div>
+	<div id="my-countdown">
+		<!-- display the countdown timer here -->
+	</div>
+	
+	<!-- include jQuery -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<!-- include underscore.js for template -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+	
+	<!-- include the countdown plugin -->
 	<script src="/js/jquery.countdown.js"></script>
+
+	<!-- create the template to use for this example -->
 	<script type="text/template" id="countdown-tpl">
 		<table>
 			<tr>
@@ -108,26 +118,32 @@ Create a countdown timer on #my-countdown that automatically starts counting dow
 			</tr>
 		</table>
 	</script>
+	
 </body>
 </html>
 ```
 
 ```js
-var opts = {
+// define what options to use
+var options = {
 	autostart: true,
 	m: 1,
 	S: 30,
 	done: function() {
+		// show a message after the countdown time once the countdown has ended
 		$('#my-countdown').after("<p>Time's up!</p>");
 	},
 	tpl: function(el,opts) {
+		// el and opts will refer to the element the countdown is running on and opts are the options assigned to it
+		// use underscore to generate the markup to be displayed from the countdown-tpl template
 		var template = _.template(
 			$('#countdown-tpl').html()
 		);
 		$(el).html(template(opts));
 	}
 }
-$("#my-countdown").countdown(opts);
+// instantiate the countdown
+$("#my-countdown").countdown(options);
 ```
 
 
