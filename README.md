@@ -76,6 +76,60 @@ $("#selector").countdown('stop');
 
 ## Examples
 
+Create a countdown timer on #my-countdown that automatically starts counting down 1 minute and 30 seconds using an undesrcore template.  Display a message when the countdown has finished.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>countdown</title>
+</head>
+<body>
+	<div id="my-countdown"></div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+	<script src="/js/jquery.countdown.js"></script>
+	<script type="text/template" id="countdown-tpl">
+		<table>
+			<tr>
+				<th>years</th>
+				<th>days</th>
+				<th>hours</th>
+				<th>minutes</th>
+				<th>seconds</th>
+			</tr>
+			<tr>
+				<td><%= y %></td>
+				<td><%= d %></td>
+				<td><%= h %></td>
+				<td><%= m %></td>
+				<td><%= s %></td>
+			</tr>
+		</table>
+	</script>
+</body>
+</html>
+```
+
+```js
+var opts = {
+	autostart: true,
+	m: 1,
+	S: 30,
+	done: function() {
+		$('#my-countdown').after("<p>Time's up!</p>");
+	},
+	tpl: function(el,opts) {
+		var template = _.template(
+			$('#countdown-tpl').html()
+		);
+		$(el).html(template(opts));
+	}
+}
+$("#my-countdown").countdown(opts);
+```
+
 
 ## MIT License
 
